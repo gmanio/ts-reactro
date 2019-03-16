@@ -3,7 +3,7 @@ import koaBody from 'koa-body';
 import cors from '@koa/cors';
 import serve from 'koa-static';
 
-import { config } from '../config/config';
+import { config } from './config';
 import { routes } from './routes';
 
 const app = new Koa();
