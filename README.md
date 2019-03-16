@@ -1,6 +1,6 @@
 # ts-reactro
 
-- [ ] Configuration server 
+- [X] Configuration server 
 - [ ] Configuration client
 - [ ] AWS deploy
 
