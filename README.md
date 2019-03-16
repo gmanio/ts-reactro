@@ -1,7 +1,7 @@
 # ts-reactro
 
 - [X] Configuration server 
-- [ ] Configuration client
+- [X] Configuration client
 - [ ] AWS deploy
 
 ## License
