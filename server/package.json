@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "",
   "scripts": {
-    "start:s": "NODE_ENV=development SERVER_ENV=local tsc-watch --onSuccess \"node dist/server.js\""
+    "start:s": "NODE_ENV=development SERVER_ENV=local tsc-watch --onSuccess \"ts-node server.ts\""
   },
   "engines": {
     "npm": ">=6.4.1",
@@ -16,12 +16,14 @@
     "koa-router": "^7.4.0",
     "koa-send": "^5.0.0",
     "koa-static": "^5.0.0",
+    "mysql": "^2.16.0",
     "tsc-watch": "^2.1.2",
     "typeorm": "^0.2.15"
   },
   "devDependencies": {
     "@koa/cors": "^3.0.0",
     "@types/koa": "^2.0.48",
+    "ts-node": "^8.0.3",
     "tslint": "^5.14.0",
     "typescript": "^3.3.3333"
   },

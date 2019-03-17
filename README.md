@@ -2,6 +2,8 @@
 
 - [X] Configuration server 
 - [X] Configuration client
+- [X] Mysql connection success
+- [X] Typeorm Search Option
 - [ ] AWS deploy
 
 ## License

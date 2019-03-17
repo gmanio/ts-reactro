@@ -3,6 +3,7 @@
 
 server/node_modules
 server/dist
+server/ormconfig.json
 
 client/node_modules
 client/.cache

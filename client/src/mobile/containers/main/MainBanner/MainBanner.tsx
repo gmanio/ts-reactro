@@ -41,8 +41,8 @@ export default class MainBanner extends React.PureComponent<Props> {
           <div className="swiper-slide">Slide 9</div>
           <div className="swiper-slide">Slide 10</div>
         </div>
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
+        <div className="swiper-button-next"></div>
+        <div className="swiper-button-prev"></div>
       </Styled.Wrapper>
     );
   }
