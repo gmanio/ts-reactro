@@ -3,15 +3,11 @@ import * as Styled from './style';
 import Swiper from 'swiper';
 import './css/swiper.min.css';
 
-interface MapDispatchToProps {
-  getMainBanner: () => void;
-}
+export default class MainBanner extends React.PureComponent {
+  private swiper;
 
-type Props = MapDispatchToProps;
-
-export default class MainBanner extends React.PureComponent<Props> {
   componentDidMount() {
-    const mySwiper = new Swiper('.swiper-container', {
+    this.swiper = new Swiper('.swiper-container', {
       // Optional parameters
       direction: 'horizontal',
       loop: false,

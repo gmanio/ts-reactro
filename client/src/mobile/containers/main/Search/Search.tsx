@@ -1,8 +1,14 @@
 import * as React from 'react';
+import styled from 'styled-components';
 import { apiFetcher } from '../../../../common/apiHelper';
 
-export default class Search extends React.PureComponent {
-  private state: { list: any[] };
+interface SearchProps {
+  /* This prop is optional, since TypeScript won't know that it's passed by the wrapper */
+  className?: string;
+}
+
+export default class Search extends React.PureComponent<SearchProps> {
+  state: { list: any[] };
 
   constructor(props) {
     super(props);
@@ -17,22 +23,28 @@ export default class Search extends React.PureComponent {
 
   handleKeyup = async (e) => {
     const name = e.currentTarget.value;
-    const data = await apiFetcher('/api/employees/search?name=' + name);
-    console.log(data);
-    this.setState({ list: data });
+    if (name) {
+      this.setState({ list: await apiFetcher('/api/employees/search?name=' + name) });
+    }
   }
 
   render = () => {
     const list = this.state.list;
+    let elList;
+
+    if (list) {
+      elList = list.map(person => (
+        <li key={person.emp_no}>{person.first_name} {person.last_name}</li>));
+    }
 
     return (
-      <>
+      <div className={this.props.className}>
         <input type="text" onKeyUp={this.handleKeyup}/>
 
         <ul>
-          {list ? list.map(person => (<li key={person.emp_no}>{person.first_name}</li>)) : ''}
+          {elList}
         </ul>
-      </>
+      </div>
     )
   }
 }
