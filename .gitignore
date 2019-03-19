@@ -4,6 +4,9 @@
 server/node_modules
 server/dist
 server/ormconfig.json
+server/public/*.css
+server/public/*.js
+server/public/index.html
 
 client/node_modules
 client/.cache

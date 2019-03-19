@@ -16,9 +16,8 @@ const EmployeeController = new Router({
 // });
 
 EmployeeController.get('/search', async (ctx, next) => {
-  // const connection = await createConnection();
   const params = ctx.query;
-  console.log(params);
+
   let scheduleRepository = getConnection().getRepository(Employee);
   let scheduleList = await scheduleRepository.find({
     where: {
