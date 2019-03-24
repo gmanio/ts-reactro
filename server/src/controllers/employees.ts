@@ -1,8 +1,9 @@
 import Router from "koa-router";
 import { getConnection, Like } from "typeorm";
 import { Employee } from '../entity/Employee';
+import { Salary } from '../entity/Salaries';
 
-const EmployeeController = new Router({
+export const EmployeeController = new Router({
   prefix: '/api/employees'
 });
 
@@ -20,14 +21,22 @@ EmployeeController.get('/search', async (ctx, next) => {
 
   let scheduleRepository = getConnection().getRepository(Employee);
   let scheduleList = await scheduleRepository.find({
+    relations: ['salaries'],
     where: {
-      'first_name': Like(`${params.name}%`)
+      'last_name': Like(`${params.name}%`)
     },
     take: 10
   });
 
+  // let scheduleRepository = getConnection().getRepository(Salary);
+  // let scheduleList = await scheduleRepository.find({
+  //   where: {
+  //     'emp_no': Like(`${params.name}%`)
+  //   },
+  //   take: 10
+  // });
+  console.log(scheduleList);
+
   // response type : application/json
   ctx.body = scheduleList;
 });
-
-export default EmployeeController.routes();

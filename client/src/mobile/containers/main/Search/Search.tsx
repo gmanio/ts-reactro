@@ -33,14 +33,15 @@ export default class Search extends React.PureComponent<SearchProps> {
     let elList;
 
     if (list) {
-      elList = list.map(person => (
-        <li key={person.emp_no}>{person.first_name} {person.last_name}</li>));
+      elList = list.map(person => {
+        console.log(person);
+        return (<li key={person.emp_no}>{person.first_name} {person.last_name}</li>)
+      });
     }
 
     return (
       <div className={this.props.className}>
         <input type="text" onKeyUp={this.handleKeyup}/>
-
         <ul>
           {elList}
         </ul>
