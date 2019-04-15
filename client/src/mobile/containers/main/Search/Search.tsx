@@ -1,6 +1,5 @@
 import * as React from 'react';
-import styled from 'styled-components';
-import { apiFetcher } from '../../../../common/apiHelper';
+// import { apiFetcher } from '../../../../common/apiHelper';
 
 interface SearchProps {
   /* This prop is optional, since TypeScript won't know that it's passed by the wrapper */
@@ -24,7 +23,7 @@ export default class Search extends React.PureComponent<SearchProps> {
   handleKeyup = async (e) => {
     const name = e.currentTarget.value;
     if (name) {
-      this.setState({ list: await apiFetcher('/api/employees/search?name=' + name) });
+      // this.setState({ list: await apiFetcher('/api/employees/search?name=' + name) });
     }
   }
 

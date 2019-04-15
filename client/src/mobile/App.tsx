@@ -1,18 +1,35 @@
 import 'sanitize.css';
-import {render} from 'react-dom';
+import 'babel-polyfill';
+import { render } from 'react-dom';
 import * as React from 'react';
-import {Route, BrowserRouter} from "react-router-dom";
-import {Main} from './pages/main';
-import {List} from "./pages/list";
+import { Suspense } from 'react';
+import {
+  BrowserRouter, Route, Switch
+} from 'react-router-dom';
+import { Main } from './pages/main';
+import { List } from './pages/list';
+import ErrorBoundary from '../common/ErrorBoundary';
+import Ajax from './pages/Ajax';
+import Working from './pages/Working';
 
 const App = () => (
   <BrowserRouter>
-    <Route path="/" exact component={Main}/>
-    <Route path="/list" component={List}/>
+    <ErrorBoundary>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Switch>
+          <Route exact path="/" component={Main}/>
+          <Route exact path="/list" component={List}/>
+          <Route exact path="/ajax" component={Ajax}/>
+          <Route exact path="/working" component={Working}/>
+          {/*<Route exact path="/notice" componet={Notice}/>*/}
+          <Route component={() => (<div>No Match</div>)}/>
+        </Switch>
+      </Suspense>
+    </ErrorBoundary>
   </BrowserRouter>
 );
 
 render(
   <App/>,
-  document.getElementById("app")
+  document.getElementById('app')
 );

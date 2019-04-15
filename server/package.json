@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "",
   "scripts": {
-    "start:s": "NODE_ENV=development SERVER_ENV=local tsc-watch --onSuccess \"ts-node server.ts\""
+    "start": "NODE_ENV=development SERVER_ENV=local tsc-watch --onSuccess \"ts-node server.ts\""
   },
   "engines": {
     "npm": ">=6.4.1",
