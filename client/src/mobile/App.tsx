@@ -14,8 +14,8 @@ import Working from './pages/Working';
 import { AppProvider } from './AppProvider';
 
 const App = () => (
-  <BrowserRouter>
-    <AppProvider>
+  <AppProvider>
+    <BrowserRouter>
       <ErrorBoundary>
         <Suspense fallback={<div>Loading...</div>}>
           <Switch>
@@ -23,13 +23,12 @@ const App = () => (
             <Route exact path="/list" component={List}/>
             <Route exact path="/ajax" component={Ajax}/>
             <Route exact path="/working" component={Working}/>
-            {/*<Route exact path="/notice" componet={Notice}/>*/}
             <Route component={() => (<div>No Match</div>)}/>
           </Switch>
         </Suspense>
       </ErrorBoundary>
-    </AppProvider>
-  </BrowserRouter>
+    </BrowserRouter>
+  </AppProvider>
 );
 
 render(
