@@ -1,5 +1,4 @@
-import { Entity, Column, PrimaryColumn, ManyToOne, JoinColumn } from "typeorm";
-import { Employee } from './Employee';
+import { Entity, Column, PrimaryColumn } from "typeorm";
 
 @Entity('salaries')
 export class Salary {
@@ -11,10 +10,4 @@ export class Salary {
   from_date: Date;
   @Column()
   to_date: Date;
-
-  @ManyToOne(type => Employee, employee => employee.salaries)
-  @JoinColumn({ // todo: not yet fixed
-    name: "emp_no"
-  })
-  employee: Employee;
 }

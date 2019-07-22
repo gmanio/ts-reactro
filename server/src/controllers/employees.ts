@@ -19,14 +19,26 @@ export const EmployeeController = new Router({
 EmployeeController.get('/search', async (ctx, next) => {
   const params = ctx.query;
 
-  let scheduleRepository = getConnection().getRepository(Employee);
-  let scheduleList = await scheduleRepository.find({
-    relations: ['salaries'],
-    where: {
-      'last_name': Like(`${params.name}%`)
+  let employeeRepository = getConnection().getRepository(Employee);
+  // let employees = await scheduleRepository.find({
+  //   relations: ['salaries'],
+  //   where: {
+  //     'last_name': Like(`${params.name}%`)
+  //   },
+  //   take: 1
+  // });
+
+  let employees2 = await employeeRepository
+  .createQueryBuilder()
+  .select('*')
+  .innerJoin(
+    query => {
+      return query
+      .from(Salary, 'salary')
+      .select('*')
     },
-    take: 10
-  });
+    'employees.emp_no = salaries.emp_no'
+  ).where("last_name like :name", {name: '%' + params.name + '%' }).getRawOne();
 
   // let scheduleRepository = getConnection().getRepository(Salary);
   // let scheduleList = await scheduleRepository.find({
@@ -35,8 +47,7 @@ EmployeeController.get('/search', async (ctx, next) => {
   //   },
   //   take: 10
   // });
-  console.log(scheduleList);
 
   // response type : application/json
-  ctx.body = scheduleList;
+  ctx.body = employees2;
 });

@@ -11,10 +11,8 @@
 import {
   Entity,
   Column,
-  PrimaryColumn, OneToOne, JoinColumn, ManyToMany, JoinTable, OneToMany, ManyToOne
+  PrimaryColumn
 } from "typeorm";
-
-import { Salary } from './Salaries';
 
 @Entity('employees')
 export class Employee {
@@ -28,10 +26,4 @@ export class Employee {
   gender: number;
   @Column()
   hire_date: string;
-
-  @OneToMany(() => Salary, salary => salary.employee)
-  @JoinColumn({ // todo: not yet fixed
-    name: "emp_no"
-  })
-  public salaries: Salary[];
 }

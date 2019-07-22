@@ -11,3 +11,6 @@ server/public/index.html
 client/node_modules
 client/.cache
 client/dist
+
+.DS_Store
+*/.DS_Store
