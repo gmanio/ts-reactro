@@ -1,5 +1,5 @@
 import Router from "koa-router";
-import { getConnection, Like } from "typeorm";
+import { createQueryBuilder, getConnection, Like } from "typeorm";
 import { Employee } from '../entity/Employee';
 import { Salary } from '../entity/Salaries';
 
@@ -20,34 +20,28 @@ EmployeeController.get('/search', async (ctx, next) => {
   const params = ctx.query;
 
   let employeeRepository = getConnection().getRepository(Employee);
-  // let employees = await scheduleRepository.find({
-  //   relations: ['salaries'],
+  // let employees = await employeeRepository.find({
   //   where: {
   //     'last_name': Like(`${params.name}%`)
   //   },
   //   take: 1
   // });
 
-  let employees2 = await employeeRepository
-  .createQueryBuilder()
-  .select('*')
-  .innerJoin(
-    query => {
-      return query
-      .from(Salary, 'salary')
-      .select('*')
-    },
-    'employees.emp_no = salaries.emp_no'
-  ).where("last_name like :name", {name: '%' + params.name + '%' }).getRawOne();
-
-  // let scheduleRepository = getConnection().getRepository(Salary);
-  // let scheduleList = await scheduleRepository.find({
-  //   where: {
-  //     'emp_no': Like(`${params.name}%`)
+  // let employees2 = await employeeRepository
+  // .createQueryBuilder()
+  // .select('*')
+  // .innerJoin(
+  //   query => {
+  //     return query
+  //     .from(Salary, 'salary')
+  //     .select('*')
   //   },
-  //   take: 10
-  // });
+  //   'employees.emp_no = salaries.emp_no'
+  // ).where("last_name like :name", {name: '%' + params.name + '%' }).getRawOne();
+
+
+  const employeeWithSalary = await getConnection().query('SELECT employee.*, salary.salary, salary.from_date, salary.to_date FROM employees employee LEFT JOIN salaries salary ON salary.emp_no = employee.emp_no LIMIT 10');
 
   // response type : application/json
-  ctx.body = employees2;
+  ctx.body = employeeWithSalary;
 });
